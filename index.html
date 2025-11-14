@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动配色 Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 左侧控制面板 -->
+        <div class="left-panel">
+            <!-- 标题区域 -->
+            <div class="title-section">
+                <h1>自动配色 Demo</h1>
+                <p class="subtitle">上传图片，系统会根据你的配色规则自动生成右侧长图</p>
+            </div>
+
+            <!-- 上传图片区域 -->
+            <div class="upload-section">
+                    <div class="upload-card">
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <p>上传本地图片</p>
+                        </div>
+                        <img id="previewImage" style="display: none; max-width: 100%; max-height: 119px; border-radius: 8px;">
+                    </div>
+                    <button class="select-btn" id="selectBtn">选择文件</button>
+                </div>
+            </div>
+
+            <!-- 当前配色显示区域 -->
+            <div class="color-section">
+                <div class="color-card">
+                    <h2>当前配色</h2>
+                    <div class="color-item">
+                        <span class="color-label">深色（strong）：</span>
+                        <div class="color-box" id="strongColorBox" style="background-color: #6B6B6B;"></div>
+                        <span class="color-code" id="strongColorCode">#xxxxxx</span>
+                    </div>
+                    <div class="color-item">
+                        <span class="color-label">浅色（soft）：</span>
+                        <div class="color-box" id="softColorBox" style="background-color: #EFEFEF;"></div>
+                        <span class="color-code" id="softColorCode">#xxxxxx</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 配色逻辑说明区域 -->
+            <div class="logic-section">
+                <div class="logic-card">
+                    <div class="logic-header">
+                        <h2>莫兰迪色系颜色展示</h2>
+                    </div>
+                    <div class="logic-content">
+                        <div class="morandi-colors-list" id="morandiColorsList">
+                            <!-- 莫兰迪色系颜色将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中间预览区域 - 苹果手机样机 -->
+        <div class="center-panel">
+            <!-- iPhone样机模式 -->
+            <div class="phone-mockup" id="phoneMockup">
+                <div class="phone-screen" id="phoneScreen">
+                    <!-- 手机顶部状态栏 -->
+                    <div class="phone-status-bar">
+                        <div class="status-bar-content">
+                            <span class="status-time">9:41</span>
+                            <div class="status-icons">
+                                <span class="signal-icon">📶</span>
+                                <span class="wifi-icon">📶</span>
+                                <span class="battery-icon">🔋</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 固定顶部导航栏 - 责任图解 -->
+                    <div class="phone-navbar">
+                        <div class="navbar-back">←</div>
+                        <div class="navbar-title">责任图解</div>
+                        <div class="navbar-app">小程序</div>
+                    </div>
+                    
+                    <!-- 可滚动内容区域 -->
+                    <div class="phone-content-wrapper">
+                    <!-- 长图预览 -->
+                    <div class="long-image" id="longImage">
+                        <!-- 主题图片区域 -->
+                        <div class="theme-image-container">
+                            <img id="themeImage" src="" alt="主题图片" style="display: none;">
+                            <p class="theme-image-label" id="themeImageLabel">主题图片（由本地上传）</p>
+                        </div>
+
+                        <!-- 标题框（在主题图片和副标题之间） -->
+                        <div class="title-box" id="titleBox">
+                            <h3>某某xx重大疾病保险（互联网）</h3>
+                        </div>
+
+                        <!-- 副标题区域 -->
+                        <div class="subtitle-section">
+                            <div class="subtitle-content">
+                                <!-- 第一行：被保人、基本保额、首年保费 -->
+                                <div class="subtitle-row">
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">被保人</span>
+                                        <span class="subtitle-value">男0岁</span>
+                                    </div>
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">基本保额</span>
+                                        <span class="subtitle-value">30万</span>
+                                    </div>
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">首年保费</span>
+                                        <span class="subtitle-value">15,400元</span>
+                                    </div>
+                                </div>
+                                <!-- 第二行：保障期间、缴费期、总保费 -->
+                                <div class="subtitle-row">
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">保障期间</span>
+                                        <span class="subtitle-value">终身</span>
+                                    </div>
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">缴费期</span>
+                                        <span class="subtitle-value">3年</span>
+                                    </div>
+                                    <div class="subtitle-item">
+                                        <span class="subtitle-label">总保费</span>
+                                        <span class="subtitle-value">7.7万</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- 浅色背景区域（在副标题下方，会随副色变化） -->
+                    <div class="light-background-section" id="lightBackgroundSection">
+
+                    <!-- 产品卖点标签区域 -->
+                    <div class="selling-points-section">
+                        <div class="selling-points-header">
+                            <span>产卖点签</span>
+                        </div>
+                        <div class="selling-points-list">
+                            <div class="selling-point-item">
+                                <div class="point-number" style="background-color: #FA3F3F;">1</div>
+                                <p>保险期间终身：等待期180日后即享有终身50万</p>
+                            </div>
+                            <div class="selling-point-item">
+                                <div class="point-number" style="background-color: #FF8F0A;">2</div>
+                                <p>重疾不分组给付1次</p>
+                            </div>
+                            <div class="selling-point-item">
+                                <div class="point-number" style="background-color: #EFDD13;">3</div>
+                                <p>有特定疾病额外给付</p>
+                            </div>
+                            <div class="selling-point-item">
+                                <div class="point-number" style="background-color: #9EDC23;">4</div>
+                                <p>有中症，轻症的豁免保费</p>
+                            </div>
+                            <div class="selling-point-item">
+                                <div class="point-number" style="background-color: #535ED9;">5</div>
+                                <p>卖点示例5</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 责任摘要区域 -->
+                    <div class="summary-section">
+                        <div class="summary-header">
+                            <span>责任摘要-脑图</span>
+                        </div>
+                        <div class="summary-content">
+                            <div class="mindmap-container">
+                                <div class="mindmap">
+                                    <!-- 中心节点 -->
+                                    <div class="mindmap-main-node" id="mindmapMainNode">
+                                        <span>责任</span>
+                                    </div>
+                                    
+                                    <!-- 主分支 -->
+                                    <div class="mindmap-branches">
+                                        <!-- 责任名称1：向右延伸 → 给付方案 → 向下延伸情况1/2 -->
+                                        <div class="mindmap-branch">
+                                            <div class="mindmap-node mindmap-sub-node" id="mindmapNode1">
+                                                <span>责任名称1</span>
+                                            </div>
+                                            <div class="mindmap-horizontal-branch">
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode1">
+                                                    <span>给付方案</span>
+                                                </div>
+                                                <div class="mindmap-vertical-details">
+                                                    <div class="mindmap-node mindmap-leaf-node" id="mindmapLeafNode1">
+                                                        <span>情况1</span>
+                                                    </div>
+                                                    <div class="mindmap-node mindmap-leaf-node" id="mindmapLeafNode2">
+                                                        <span>情况2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 责任名称2：直接向下延伸5个节点 -->
+                                        <div class="mindmap-branch">
+                                            <div class="mindmap-node mindmap-sub-node" id="mindmapNode2">
+                                                <span>责任名称2</span>
+                                            </div>
+                                            <div class="mindmap-vertical-details">
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode2">
+                                                    <span>给付方案</span>
+                                                </div>
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode3">
+                                                    <span>疾病种类: (如有)</span>
+                                                </div>
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode4">
+                                                    <span>分组数量: 14组 (如有)</span>
+                                                </div>
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode5">
+                                                    <span>给付时间间隔: 1年</span>
+                                                </div>
+                                                <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode6">
+                                                    <span>给付次数: 2次 (如有)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 责任名称3：向下延伸3个副标题，然后副标题1/2向右延伸详情 -->
+                                        <div class="mindmap-branch">
+                                            <div class="mindmap-node mindmap-sub-node" id="mindmapNode3">
+                                                <span>责任名称3</span>
+                                            </div>
+                                            <div class="mindmap-vertical-branches">
+                                                <!-- 副标题1 -->
+                                                <div class="mindmap-subtitle-branch">
+                                                    <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode7">
+                                                        <span>副标题1</span>
+                                                    </div>
+                                                    <div class="mindmap-horizontal-details">
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode10">
+                                                            <span>给付方案:</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode11">
+                                                            <span>疾病种类: (如有)</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode12">
+                                                            <span>分组数量: 14组</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode13">
+                                                            <span>给付时间间隔: 1年 (如有)</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode14">
+                                                            <span>给付次数: 2次 (如有)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 副标题2 -->
+                                                <div class="mindmap-subtitle-branch">
+                                                    <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode8">
+                                                        <span>副标题2</span>
+                                                    </div>
+                                                    <div class="mindmap-horizontal-details">
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode15">
+                                                            <span>给付方案:</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode16">
+                                                            <span>疾病种类: (如有)</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode17">
+                                                            <span>分组数量: (如有)</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode18">
+                                                            <span>给付时间间隔: 1年 (如有)</span>
+                                                        </div>
+                                                        <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode19">
+                                                            <span>给付次数: 2次 (如有)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 副标题3 -->
+                                                <div class="mindmap-subtitle-branch">
+                                                    <div class="mindmap-node mindmap-detail-node" id="mindmapDetailNode9">
+                                                        <span>副标题3</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 责任名称... -->
+                                        <div class="mindmap-branch">
+                                            <div class="mindmap-node mindmap-sub-node" id="mindmapNode4">
+                                                <span>责任名称...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 疾病条款区域 -->
+                    <div class="terms-section">
+                        <div class="terms-header">
+                            <span>疾病条款</span>
+                        </div>
+                        <div class="terms-content">
+                            <!-- 这里可以放置疾病条款内容 -->
+                        </div>
+                    </div>
+
+                    <!-- 名片区域 -->
+                    <div class="card-section">
+                        <div class="card-content">
+                            <!-- 头像区域 -->
+                            <div class="card-avatar" id="cardAvatar"></div>
+                            
+                            <!-- 信息区域 -->
+                            <div class="card-info">
+                                <div class="card-name">月光腓腓</div>
+                                <div class="card-role">
+                                    <svg class="card-icon" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                                        <path d="M5.5 0C2.46 0 0 2.46 0 5.5C0 8.54 2.46 11 5.5 11C8.54 11 11 8.54 11 5.5C11 2.46 8.54 0 5.5 0ZM5.5 8.25C4.12 8.25 3 7.13 3 5.75C3 4.37 4.12 3.25 5.5 3.25C6.88 3.25 8 4.37 8 5.75C8 7.13 6.88 8.25 5.5 8.25Z" fill="currentColor"/>
+                                    </svg>
+                                    <span>业务员</span>
+                                </div>
+                                <div class="card-phone">
+                                    <svg class="card-icon" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                        <path d="M10.5 7.5L8.5 5.5L7.5 6.5L9.5 8.5L10.5 7.5ZM2.5 1.5L4.5 3.5L3.5 4.5L1.5 2.5L2.5 1.5ZM5.5 0.5L7.5 2.5L6.5 3.5L4.5 1.5L5.5 0.5ZM1.5 4.5L3.5 6.5L2.5 7.5L0.5 5.5L1.5 4.5Z" fill="currentColor"/>
+                                    </svg>
+                                    <span>12345678987</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 二维码区域 -->
+                            <div class="card-qrcode" id="cardQrcode">
+                                <canvas id="qrcodeCanvas" width="50" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- 浅色背景区域结束 -->
+                    </div>
+                    <!-- 长图结束 -->
+                    </div>
+                    <!-- 可滚动内容区域结束 -->
+                    
+                    <!-- 固定底部按钮 - 设置并转发 -->
+                    <div class="phone-footer">
+                        <button class="footer-button" id="footerButton">设置并转发</button>
+                    </div>
+                </div>
+                <!-- 手机屏幕结束 -->
+            </div>
+            
+            <!-- H5长图模式 -->
+            <div class="h5-long-image-container" id="h5LongImageContainer" style="display: none;">
+                <div class="h5-long-image-content" id="h5LongImageContent">
+                    <!-- 长图内容将从phone-content-wrapper复制过来 -->
+                </div>
+            </div>
+            
+            <!-- 切换按钮 -->
+            <div class="view-toggle-btn">
+                <div class="toggle-btn-top" id="iphoneBtn">
+                    <span>iPhone</span>
+                </div>
+                <div class="toggle-btn-bottom" id="h5Btn">
+                    <span>H5长图</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧代码卡片区域 -->
+        <div class="right-panel">
+            <!-- 上方卡片：取色逻辑 -->
+            <div class="code-card code-card-large">
+                <div class="code-card-header">
+                    <h2>取色逻辑</h2>
+                </div>
+                <div class="code-card-content">
+                    <div class="code-block">
+                        <pre class="code-output" id="colorLogicOutput"><code class="code-content">// 上传图片后，取色逻辑代码将显示在这里</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下方卡片：Palette JSON 例子 -->
+            <div class="code-card code-card-small">
+                <div class="code-card-header">
+                    <h2>Palette JSON 例子</h2>
+                </div>
+                <div class="code-card-content">
+                    <div class="code-block">
+                        <pre class="code-output" id="paletteJsonOutput"><code class="code-content">// 上传图片后，Palette JSON代码将显示在这里</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

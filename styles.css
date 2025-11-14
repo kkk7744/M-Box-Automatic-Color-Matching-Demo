@@ -1,0 +1,1416 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #D9D9D9;
+    color: #000000;
+    line-height: 1.4;
+}
+
+/* 主容器 - 使用Flexbox布局 */
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    gap: 0;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* 左侧控制面板 */
+.left-panel {
+    width: 413px;
+    height: 812px; /* 与右侧样机高度一致 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden; /* 防止内容溢出 */
+    flex-shrink: 0;
+    margin-left: 63px;
+}
+
+/* 标题区域 */
+.title-section {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 26px 22px;
+    flex-shrink: 0; /* 不收缩 */
+}
+
+.title-section h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #7948EA;
+    margin-bottom: 10px;
+}
+
+.title-section .subtitle {
+    font-size: 14px;
+    color: #7948EA;
+    margin-top: 10px;
+}
+
+/* 上传图片区域 */
+.upload-section {
+    flex-shrink: 0; /* 不收缩 */
+}
+
+.upload-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 18px 25px 25px;
+}
+
+.upload-area {
+    width: 100%;
+    height: 119px;
+    background-color: #ECECEC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background-color: #E0E0E0;
+}
+
+.upload-area.dragover {
+    background-color: #D0D0D0;
+    border: 2px dashed #7948EA;
+}
+
+.upload-placeholder {
+    text-align: center;
+}
+
+.upload-placeholder p {
+    font-size: 20px;
+    color: rgba(85, 85, 85, 0.33);
+}
+
+.select-btn {
+    width: 100%;
+    height: 39px;
+    background-color: #7948EA;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.select-btn:hover {
+    background-color: #6a3dd1;
+}
+
+/* 当前配色显示区域 */
+.color-section {
+    flex-shrink: 0; /* 不收缩 */
+}
+
+.color-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 22px 35px;
+}
+
+.color-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #7948EA;
+    margin-bottom: 13px;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 10px;
+}
+
+.color-label {
+    font-size: 20px;
+    color: #000000;
+    width: 160px;
+}
+
+.color-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.color-code {
+    font-size: 20px;
+    color: #000000;
+}
+
+/* 配色逻辑说明区域 */
+.logic-section {
+    flex: 1;
+    min-height: 0; /* 允许flex子元素缩小 */
+    overflow-y: auto; /* 如果内容过多，可以滚动 */
+}
+
+.logic-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.logic-header {
+    background-color: #7948EA;
+    border-radius: 16px 16px 0 0;
+    padding: 17px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.logic-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.logic-content {
+    padding: 20px 18px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100% - 60px);
+}
+
+/* 莫兰迪色系颜色列表 */
+.morandi-colors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.morandi-color-item {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.morandi-color-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.morandi-color-item .color-hex {
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 1;
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.code-block {
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.code-title {
+    font-size: 20px;
+    color: rgba(85, 85, 85, 0.33);
+    margin-bottom: 15px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.code-output {
+    flex: 1;
+    margin: 0;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    overflow-x: auto;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-content {
+    margin: 0;
+    padding: 0;
+    color: #666;
+    font-style: italic;
+}
+
+/* 自定义滚动条样式 */
+.code-block::-webkit-scrollbar {
+    width: 6px;
+}
+
+.code-block::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.code-block::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.code-block::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 中间预览区域 - 苹果手机样机 */
+.center-panel {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    gap: 20px;
+}
+
+/* 确保按钮在样机左侧垂直居中 */
+.center-panel .view-toggle-btn {
+    align-self: center;
+    order: -1; /* 将按钮移到左侧 */
+}
+
+/* 切换按钮 - 圆角长方形 */
+.view-toggle-btn {
+    width: 80px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px; /* 圆角长方形 */
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    flex-shrink: 0;
+    border: 1px solid #E0E0E0;
+    background-color: #FFFFFF;
+}
+
+.toggle-btn-top,
+.toggle-btn-bottom {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666666;
+    transition: all 0.3s ease;
+    user-select: none;
+    background-color: #FFFFFF;
+}
+
+.toggle-btn-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.toggle-btn-bottom {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top: 1px solid #E0E0E0;
+}
+
+.toggle-btn-top.active,
+.toggle-btn-bottom.active {
+    background-color: #7948EA;
+    color: #FFFFFF;
+}
+
+.toggle-btn-top:hover:not(.active),
+.toggle-btn-bottom:hover:not(.active) {
+    background-color: #F5F5F5;
+}
+
+/* H5长图模式容器 - 与iPhone去掉固定部分后完全一致 */
+.h5-long-image-container {
+    width: 375px;
+    max-height: 812px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+    position: relative;
+    /* 与phone-content-wrapper的滚动样式完全一致 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 和 Edge */
+    -webkit-overflow-scrolling: touch;
+}
+
+.h5-long-image-container::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+    display: none;
+}
+
+.h5-long-image-container::-webkit-scrollbar-track {
+    display: none;
+}
+
+.h5-long-image-container::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.h5-long-image-content {
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+}
+
+/* H5长图模式下的样式调整 - 与phone-content-wrapper内的long-image完全一致 */
+.h5-long-image-content .long-image {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+/* 确保H5模式下所有元素样式与phone-content-wrapper内的long-image完全一致 */
+.h5-long-image-content .theme-image-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.h5-long-image-content .title-box {
+    width: calc(100% - 62px);
+    box-sizing: border-box;
+    margin: 0 31px;
+    margin-top: -25px;
+}
+
+.h5-long-image-content .subtitle-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 0;
+    padding-top: 40px;
+}
+
+.h5-long-image-content .subtitle-content {
+    padding: 0 42px;
+}
+
+.h5-long-image-content .selling-points-section,
+.h5-long-image-content .summary-section,
+.h5-long-image-content .terms-section,
+.h5-long-image-content .card-section {
+    width: calc(100% - 32px);
+    box-sizing: border-box;
+    margin: 20px 16px;
+}
+
+.h5-long-image-content .light-background-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* 右侧代码卡片区域 */
+.right-panel {
+    width: calc(413px * 2 / 3); /* 比左侧卡片窄三分之一 */
+    height: 812px; /* 与左侧卡片高度一致 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+    margin-right: 63px;
+}
+
+/* 苹果手机样机 */
+.phone-mockup {
+    width: 375px;
+    height: 812px;
+    background: #000000; /* 黑色外壳 */
+    border-radius: 40px;
+    padding: 8px; /* 边框加粗 */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 19px; /* 椭圆形，灵动岛样式 */
+    z-index: 10;
+}
+
+.phone-mockup::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* 手机屏幕内容 */
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #874DF2 0%, #582CDB 100%);
+    border-radius: 36px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 手机状态栏 */
+.phone-status-bar {
+    height: 44px;
+    background: transparent;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 5;
+}
+
+.status-bar-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-icons {
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+}
+
+/* 固定顶部导航栏 */
+.phone-navbar {
+    height: 53px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.navbar-back {
+    position: absolute;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    color: #FFFFFF;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar-title {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    /* 确保标题在绝对中心 */
+}
+
+.navbar-app {
+    position: absolute;
+    right: 20px;
+    width: 60px;
+    height: 24px;
+    background: rgba(39, 39, 39, 0.8);
+    border: 0.5px solid #CCCCCC;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 可滚动内容区域 */
+.phone-content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+    -webkit-overflow-scrolling: touch;
+    /* 隐藏滚动条但保留滚动功能 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 和 Edge */
+}
+
+/* 自定义滚动条样式 - 隐藏滚动条 */
+.phone-content-wrapper::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+    display: none;
+}
+
+.phone-content-wrapper::-webkit-scrollbar-track {
+    display: none;
+}
+
+.phone-content-wrapper::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+/* 固定底部按钮 */
+.phone-footer {
+    height: 82px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.footer-button {
+    width: 343px;
+    height: 50px;
+    background-color: #7948EA;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.footer-button:hover {
+    background-color: #6a3dd1;
+}
+
+/* 长图预览 */
+.long-image {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 浅色背景区域（在副标题下方，会随副色变化） */
+.light-background-section {
+    background-color: #EFEFEF; /* 初始颜色，会通过JavaScript动态更新为副色 */
+    width: 100%;
+    min-height: 960px; /* 确保有足够的高度 */
+    padding-bottom: 20px;
+}
+
+/* 主题图片区域 - 16:9比例 */
+.theme-image-container {
+    position: relative;
+    width: 100%;
+    /* 16:9比例：375 / 16 * 9 = 210.9375，约211px */
+    height: 0;
+    padding-bottom: 56.25%; /* 9/16 = 0.5625 = 56.25% */
+    background-color: #898989;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.theme-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.theme-image-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #B9B9B9;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap; /* 保持文字在一行，不换行 */
+    z-index: 2;
+}
+
+/* 副标题区域 */
+.subtitle-section {
+    background-color: #FFFFFF;
+    padding: 20px 0;
+    padding-top: 40px; /* 增加顶部内边距，为标题框留出空间 */
+    position: relative;
+    z-index: 2;
+}
+
+.subtitle-content {
+    padding: 0 42px;
+}
+
+.subtitle-row {
+    display: flex;
+    gap: 56px;
+    margin-bottom: 20px;
+}
+
+.subtitle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 57px;
+    min-width: 57px; /* 确保最小宽度 */
+    flex-shrink: 0; /* 防止收缩 */
+}
+
+.subtitle-label {
+    font-size: 12px;
+    color: #555555; /* 固定颜色，永远不变 */
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle-value {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap; /* 保持文字在一行，不换行 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    text-overflow: ellipsis; /* 如果文字太长，显示省略号 */
+    /* 颜色会通过JavaScript动态设置，使用深色（主色） */
+}
+
+/* 标题框（一半在主题图区域，一半在副标题区域） */
+.title-box {
+    background-color: #6B6B6B; /* 初始颜色，会通过JavaScript动态更新为深色 */
+    border-radius: 8px;
+    padding: 13px 20px;
+    margin: 0 31px;
+    margin-top: -25px; /* 负边距，让标题框一半在主题图区域 */
+    position: relative;
+    z-index: 3; /* 确保在主题图片上方 */
+    width: calc(100% - 62px); /* 确保标题框占满可用宽度 */
+    box-sizing: border-box;
+}
+
+.title-box h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: left;
+    white-space: nowrap; /* 保持文字在一行，不换行 */
+    overflow: visible; /* 允许内容溢出，确保完整显示 */
+    text-overflow: clip; /* 不显示省略号，完整显示文字 */
+    width: 100%;
+}
+
+/* 产品卖点标签区域 */
+.selling-points-section {
+    margin: 20px 16px;
+    background-color: #FFFFFF; /* 卡片区域保持白色 */
+    border-radius: 6px;
+}
+
+.selling-points-header {
+    background-color: #6B6B6B;
+    border-radius: 6px 6px 0 0;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.selling-points-header span {
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.selling-points-list {
+    padding: 16px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.selling-point-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background-color: #EFEFEF; /* 初始颜色，会通过JavaScript动态更新为副色 */
+    border-radius: 8px;
+    padding: 5px 13px;
+}
+
+.point-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    flex-shrink: 0;
+}
+
+.selling-point-item p {
+    font-size: 12px;
+    color: #6B6B6B;
+    margin: 0;
+}
+
+/* 责任摘要区域 */
+.summary-section {
+    margin: 20px 16px;
+    background-color: #FFFFFF; /* 卡片区域保持白色 */
+    border-radius: 6px;
+}
+
+.summary-header {
+    background-color: #6B6B6B;
+    border-radius: 6px 6px 0 0;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.summary-header span {
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.summary-content {
+    padding: 20px 15px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 思维导图容器 - 根据Figma设计 */
+.mindmap-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* 等比例缩小以适应卡片 */
+    transform: scale(0.9);
+    transform-origin: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mindmap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 26.4px; /* 根据Figma: 从中心节点到分支的距离 */
+    width: auto;
+    height: auto;
+}
+
+/* 中心节点 - 根据Figma设计 */
+.mindmap-main-node {
+    background-color: #6B6B6B; /* 初始颜色，会通过JavaScript动态更新为深色 */
+    color: #FFFFFF;
+    padding: 3px 3.6px; /* Figma: padding: 3px 3.6px */
+    border: 0.3px solid #6B6B6B; /* Figma: stroke 0.3px */
+    border-radius: 1.8px; /* Figma: borderRadius 1.8px */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 10.8px; /* Figma: fontSize 10.8px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.5; /* Figma: lineHeight 1.5 */
+    white-space: nowrap;
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 主分支容器 */
+.mindmap-branches {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 根据Figma精确布局，不使用gap */
+    flex: 1;
+    position: relative;
+}
+
+.mindmap-branch {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 根据Figma精确布局 */
+    position: relative;
+    margin-bottom: 0; /* 精确控制间距 */
+}
+
+/* 根据Figma布局，责任名称1在顶部，责任名称2在中间，责任名称3在下方 */
+.mindmap-branch:nth-child(1) {
+    margin-bottom: 0; /* 责任名称1 */
+}
+
+.mindmap-branch:nth-child(2) {
+    margin-top: 81px; /* 责任名称2，根据Figma: y: 81 */
+}
+
+.mindmap-branch:nth-child(3) {
+    margin-top: 72px; /* 责任名称3，根据Figma布局计算 */
+}
+
+.mindmap-branch:nth-child(4) {
+    margin-top: 102px; /* 责任名称...，根据Figma布局计算 */
+}
+
+/* 连接线 - 从中心节点到子节点（水平线） */
+.mindmap-branch::before {
+    content: '';
+    position: absolute;
+    left: -26.4px; /* 根据Figma布局计算 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26.4px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 子节点（责任名称） - 根据Figma设计 */
+.mindmap-sub-node {
+    background-color: #EFEFEF; /* Figma: fill #EFEFEF */
+    color: #6B6B6B; /* Figma: fill #6B6B6B */
+    padding: 3px 3.6px; /* Figma: padding 3px 3.6px */
+    border-radius: 1.8px; /* Figma: borderRadius 1.8px */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 8.4px; /* Figma: fontSize 8.4px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.43; /* Figma: lineHeight 1.43 */
+    white-space: nowrap;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 水平分支（向右延伸） */
+.mindmap-horizontal-branch {
+    display: flex;
+    align-items: center;
+    gap: 21.6px; /* 根据Figma布局 */
+    margin-left: 21.6px; /* 根据Figma布局 */
+    position: relative;
+}
+
+/* 连接线 - 从责任名称到给付方案的水平线 */
+.mindmap-horizontal-branch::before {
+    content: '';
+    position: absolute;
+    left: -21.6px; /* 根据Figma布局 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 21.6px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 垂直详情列表（向下延伸） */
+.mindmap-vertical-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 根据Figma精确布局 */
+    margin-left: 21.6px; /* 根据Figma布局 */
+    position: relative;
+}
+
+.mindmap-vertical-details > .mindmap-node {
+    margin-bottom: 0; /* 精确控制间距 */
+}
+
+/* 连接线 - 从父节点向下延伸的垂直线 */
+.mindmap-vertical-details::before {
+    content: '';
+    position: absolute;
+    left: -21.6px; /* 根据Figma布局 */
+    top: 0;
+    width: 0.8px; /* Figma: strokeWeight 0.8px */
+    height: 100%;
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 连接线 - 从垂直线到每个节点的水平线 */
+.mindmap-vertical-details > .mindmap-node::before {
+    content: '';
+    position: absolute;
+    left: -21.6px; /* 根据Figma布局 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 21.6px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 垂直分支容器（用于责任名称3的副标题） */
+.mindmap-vertical-branches {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 根据Figma精确布局 */
+    margin-left: 26.4px; /* 根据Figma布局 */
+    position: relative;
+}
+
+/* 连接线 - 从责任名称3向下延伸的垂直线 */
+.mindmap-vertical-branches::before {
+    content: '';
+    position: absolute;
+    left: -26.4px; /* 根据Figma布局 */
+    top: 0;
+    width: 0.8px; /* Figma: strokeWeight 0.8px */
+    height: 100%;
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 副标题分支 */
+.mindmap-subtitle-branch {
+    display: flex;
+    align-items: flex-start;
+    gap: 21.6px; /* 根据Figma布局 */
+    position: relative;
+    margin-bottom: 0; /* 精确控制间距 */
+}
+
+/* 连接线 - 从垂直线到副标题的水平线 */
+.mindmap-subtitle-branch::before {
+    content: '';
+    position: absolute;
+    left: -26.4px; /* 根据Figma布局 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26.4px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 水平详情列表（向右延伸，用于副标题的详情） */
+.mindmap-horizontal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 根据Figma精确布局 */
+    margin-left: 21.6px; /* 根据Figma布局 */
+    position: relative;
+}
+
+.mindmap-horizontal-details > .mindmap-node {
+    margin-bottom: 0; /* 精确控制间距 */
+}
+
+/* 连接线 - 从副标题向右延伸的水平线 */
+.mindmap-horizontal-details::before {
+    content: '';
+    position: absolute;
+    left: -21.6px; /* 根据Figma布局 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 21.6px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 连接线 - 从水平线向下延伸的垂直线 */
+.mindmap-horizontal-details::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0.8px; /* Figma: strokeWeight 0.8px */
+    height: 100%;
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 连接线 - 从垂直线到每个详情节点的水平线 */
+.mindmap-horizontal-details > .mindmap-node::before {
+    content: '';
+    position: absolute;
+    left: -21.6px; /* 根据Figma布局 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 21.6px; /* 根据Figma布局 */
+    height: 0.8px; /* Figma: strokeWeight 0.8px */
+    background-color: #6B6B6B; /* Figma: stroke #6B6B6B */
+    z-index: 1;
+}
+
+/* 详情节点 - 根据Figma设计 */
+.mindmap-detail-node {
+    background-color: transparent; /* 默认透明，部分节点有背景 */
+    color: #6B6B6B; /* Figma: fill #6B6B6B */
+    border: 1px solid #EFEFEF; /* Figma: stroke 1px #EFEFEF 或 #6B6B6B */
+    padding: 1.2px 3.6px; /* Figma: padding 1.2px 3.6px */
+    border-radius: 1.8px; /* Figma: borderRadius 1.8px */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 6px; /* Figma: fontSize 6px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.6; /* Figma: lineHeight 1.6 */
+    white-space: nowrap;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 副标题节点 - 有背景色和边框 */
+.mindmap-detail-node[id*="DetailNode7"],
+.mindmap-detail-node[id*="DetailNode8"],
+.mindmap-detail-node[id*="DetailNode9"] {
+    background-color: #EFEFEF; /* Figma: fill #EFEFEF */
+    border: 1px solid #6B6B6B; /* Figma: stroke #6B6B6B */
+    padding: 1.8px 3.6px; /* Figma: padding 1.8px 3.6px (副标题1) */
+}
+
+/* 给付时间间隔节点 - 有背景色 */
+.mindmap-detail-node[id*="DetailNode5"],
+.mindmap-detail-node[id*="DetailNode13"],
+.mindmap-detail-node[id*="DetailNode18"] {
+    background-color: #FFFFFF; /* Figma: fill #FFFFFF */
+    border: 1px solid #6B6B6B; /* Figma: stroke #6B6B6B */
+}
+
+
+/* 叶子节点 - 根据Figma设计 */
+.mindmap-leaf-node {
+    background-color: transparent;
+    color: #6B6B6B; /* Figma: fill #6B6B6B */
+    border: 1px solid #EFEFEF; /* Figma: stroke 1px #EFEFEF */
+    padding: 1.2px 3.6px; /* Figma: padding 1.2px 3.6px */
+    border-radius: 1.8px; /* Figma: borderRadius 1.8px */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 6px; /* Figma: fontSize 6px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.6; /* Figma: lineHeight 1.6 */
+    white-space: nowrap;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* 疾病条款区域 */
+.terms-section {
+    margin: 20px 16px;
+    background-color: #FFFFFF; /* 卡片区域保持白色 */
+    border-radius: 6px;
+}
+
+.terms-header {
+    background-color: #6B6B6B;
+    border-radius: 6px 6px 0 0;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.terms-header span {
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.terms-content {
+    padding: 20px;
+    min-height: 150px;
+}
+
+/* 名片区域 - 根据Figma设计 */
+.card-section {
+    margin: 20px 16px;
+    padding: 0;
+    background-color: #FFFFFF; /* Figma: fill #FFFFFF */
+    border: none;
+    border-radius: 6px; /* Figma: borderRadius 6px */
+    min-height: 91px; /* Figma: height 90.6px */
+    overflow: hidden;
+}
+
+.card-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 13px 10px; /* 根据Figma布局调整 */
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 90.6px; /* Figma: height 90.6px */
+}
+
+/* 头像区域 - 大正方形 */
+.card-avatar {
+    width: 68px; /* Figma: width 68px */
+    height: 68px; /* Figma: height 68px */
+    background-color: #979797; /* 初始颜色，会通过JavaScript动态更新为深色 */
+    border-radius: 4px; /* Figma: borderRadius 4px */
+    flex-shrink: 0;
+    margin-right: 8px; /* 根据Figma: x:86 - x:10 - width:68 = 8px */
+}
+
+/* 信息区域 */
+.card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 1px; /* 微调对齐 */
+}
+
+.card-name {
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 16px; /* Figma: fontSize 16px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.4; /* Figma: lineHeight 1.4 */
+    color: #6B6B6B; /* Figma: fill #6B6B6B，会通过JavaScript动态更新为深色 */
+    margin-bottom: 5px; /* 根据Figma布局计算 */
+}
+
+.card-role {
+    display: flex;
+    align-items: center;
+    gap: 7.65px; /* 根据Figma布局计算 */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 12px; /* Figma: fontSize 12px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.4; /* Figma: lineHeight 1.4 */
+    color: #6B6B6B; /* Figma: fill #6B6B6B，会通过JavaScript动态更新为深色 */
+    margin-bottom: 6px; /* 根据Figma布局计算 */
+}
+
+.card-icon {
+    width: 11px; /* Figma: width 11px */
+    height: 11px; /* Figma: height 11px */
+    color: #6B6B6B; /* Figma: fill #6B6B6B，会通过JavaScript动态更新为深色 */
+    flex-shrink: 0;
+}
+
+.card-phone {
+    display: flex;
+    align-items: center;
+    gap: 7.5px; /* 根据Figma布局计算 */
+    font-family: 'PingFang SC', sans-serif;
+    font-size: 12px; /* Figma: fontSize 12px */
+    font-weight: 400; /* Figma: fontWeight 400 */
+    line-height: 1.4; /* Figma: lineHeight 1.4 */
+    color: #6B6B6B; /* Figma: fill #6B6B6B，会通过JavaScript动态更新为深色 */
+}
+
+.card-phone .card-icon {
+    width: 10.95px; /* Figma: width 10.95px */
+    height: 9.86px; /* Figma: height 9.86px */
+}
+
+/* 二维码区域 - 小正方形 */
+.card-qrcode {
+    width: 50px; /* Figma: width 50px */
+    height: 50px; /* Figma: height 50px */
+    background-color: #979797; /* Figma: fill #979797，占位颜色 */
+    border-radius: 6px; /* Figma: borderRadius 6px */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* 靠右对齐 */
+    margin-top: 17px; /* 根据Figma: y:30 - padding:13 = 17px */
+}
+
+.card-qrcode canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+
+/* 右侧代码卡片样式 */
+.code-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.code-card-large {
+    flex: 1.5; /* 上方卡片高度较高 */
+    min-height: 0;
+}
+
+.code-card-small {
+    flex: 1; /* 下方卡片高度较低 */
+    min-height: 0;
+}
+
+.code-card-header {
+    background-color: #7948EA;
+    border-radius: 16px 16px 0 0;
+    padding: 17px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.code-card-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.code-card-content {
+    padding: 20px 18px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.code-card-content .code-block {
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.code-card-content .code-output {
+    flex: 1;
+    margin: 0;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    overflow-x: auto;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* 自定义滚动条样式 */
+.code-card-content .code-block::-webkit-scrollbar {
+    width: 6px;
+}
+
+.code-card-content .code-block::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.code-card-content .code-block::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.code-card-content .code-block::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-panel {
+        width: 100%;
+    }
+
+    .right-panel {
+        width: 100%;
+    }
+
+    .preview-container {
+        width: 100%;
+        max-width: 375px;
+        margin: 0 auto;
+    }
+}
+
